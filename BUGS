@@ -1,0 +1,6 @@
+* MP3 title tags that have the '/' character in them need it subbed out in the database
+for something else (like maybe '-').
+
+* Unicode stuff is currently translated to latin-1...not completely correct!
+* Need a way to properly tag custom genres (use eyeD3 utility?)
+* Should add a "Ballroom" top-level entry, broken down into dances.

@@ -1,0 +1,27 @@
+To mount this fs, use a command like:
+  mountfs.py /tmp/mnt -d -s -o ro,allow_other -db <full_path_to_db_file>
+
+The -d flag is optional - it puts the fs into debug mode. The -s flag, however,
+is mandatory (single thread mode).
+
+Currently, the fs is hardcoded to the DB to use - in this case, it's
+~/Projects/MusicDir/full.db. This should probably be converted into a command-line
+flag.
+
+
+
+===========================================================
+To build a database from a filesystem, use:
+dbloader.py <style> <database file> <path1> <path2> ...
+
+NEED TO IMPLEMENT FILTERS on dbloader, so we can handle different ways
+of seeing the same thing (genres have Sound Track, Soundtrack, etc. Artist
+has RJ Dio, Ronnie James Dio, etc.) Should have a filter when reading tags
+that compares the inputs with a list of known alternatives, and adds the real 
+version.
+GenreDict = {"Sound Track":"Soundtrack",
+             "soundtrack" :"Soundtrack", ... etc.}
+===========================================================
+To dump the contents of the database, use:
+
+dumpdb.py <database file>

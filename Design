@@ -1,0 +1,61 @@
+Maybe have several layers:
+
+Per-file tag loader
+-------------------
+DB update interface
+-------------------
+SQLite
+-------------------
+DB Read layer
+-------------------
+Fuse layer
+
+
+=====================================================
+TAG LOADER:
+
+Have an interface that is implemented by any number of file tag
+loaders. Have a factory that returns the appropriate tag loader for a
+given file extension. Have the init() function register the loader
+with the factory, and have just a single object per class.
+
+class TagLoader:
+  def getTags(self, file):
+
+
+Returns a dictionary of tag name to tag value. Probably need to
+validate that all tags are there.
+
+======================================================
+DB INTERFACE:
+
+Can probably combine the read/write into a single class.
+
+Want to be able to:
+* Open a database (maybe in __init__()?)
+* Close a database (maybe in __del__()?)
+* Clear out all entries.
+* Print database stats (?)
+* Add a list of entries.
+* Remove a list of entries.
+* Get a list of entries with the given matching tags
+  (like select * where TAGA=taga and TAGB=tagb)
+  Maybe even have an interface where we can pick the column name(s)?
+
+class DBInterface:
+  def __init__(self, dbname):
+  def __del__(self):
+  def clear(self):
+  def printStats(self):
+  def addEntries(self,entries):
+  def removeEntries(self,entries):
+  def getEntries(self,tags,columns=None): 
+
+======================================================
+FUSE LAYER:
+
+Need to implement a bunch of read-only operations. Probably can just
+get away with having the write operations simply be no-ops.
+
+======================================================
+
